@@ -85,6 +85,7 @@ export default class Index extends Vue {
 
   todos: Array<string> = [];
 
+  // pushing current todo in todos array
   onAddTodo () {
     if (this.form.validate()) {
       this.todos.push(this.enteredValue);
@@ -92,8 +93,15 @@ export default class Index extends Vue {
     }
   }
 
+  // Deleting todo
   onDeleteTodo (index: string | number) {
-    const remainingTodo = this.todos.filter((_item, indx) => indx !== index);
+    // initializing remaining tods
+    let remainingTodo: Array<string> = [];
+
+    // Filtering todos and removing choosen todo
+    remainingTodo = this.todos.filter((_item, idx) => idx !== index);
+
+    // updating the state
     this.todos = remainingTodo;
   }
 }

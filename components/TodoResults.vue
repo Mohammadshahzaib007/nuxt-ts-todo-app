@@ -40,19 +40,11 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator';
 @Component
 export default class TodoResults extends Vue {
  @Prop()
+// array of todos which we are looping throught in template and rendering it
  todos!: Array<string>;
 
+ // emiting event for deleting todo and passing index of the todo
  emit = ['onDeleteTodo']
-
- mounted () {
-   window.addEventListener('keydown', (e) => {
-
-   });
- }
-
- destroyed () {
-
- }
 };
 </script>
 
