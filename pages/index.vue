@@ -88,29 +88,6 @@ export default class Index extends Vue {
 
   enteredValue = '';
 
-  // todos: Array<string> = [];
-
-  // // pushing current todo in todos array
-  // onAddTodo () {
-  //   if (this.form.validate()) {
-  //     this.todos.push(this.enteredValue);
-  //     this.enteredValue = '';
-  //   }
-  // }
-
-  // // Deleting todo
-  // onDeleteTodo (index: string | number) {
-  //   // initializing remaining tods
-  //   let remainingTodo: Array<string> = [];
-
-  //   // Filtering todos and removing choosen todo
-  //   remainingTodo = this.todos.filter((_item, idx) => idx !== index);
-
-  //   // updating the state
-  //   this.todos = remainingTodo;
-
-  //   // migrating into vuex
-
   // geting list of todo
   get todos () : Array<string> {
     return store.state.todo.list;
@@ -119,7 +96,6 @@ export default class Index extends Vue {
   // pushing new todo in the list array
   addTodo () {
     if (this.form.validate()) {
-      // this.$store.commit('ADD_TODO', this.enteredValue);
       store.commit.ADD_TODO(this.enteredValue);
       this.enteredValue = '';
     }

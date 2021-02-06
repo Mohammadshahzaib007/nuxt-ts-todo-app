@@ -41,17 +41,6 @@ import { store } from '../store';
 
 @Component
 export default class TodoResults extends Vue {
-//  @Prop()
-  // array of todos which we are looping throught in template and rendering it
-  //  todos!: Array<string>;
-
-  // emiting event for deleting todo and passing index of the todo
-  //  emit = ['onDeleteTodo']
-
-  // after using vuex
-
-  // global state of todos
-
   public get todos () : Array<string> {
     return store.state.todo.list;
   }
