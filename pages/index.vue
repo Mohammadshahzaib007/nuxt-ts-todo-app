@@ -26,7 +26,7 @@
                 ref="form"
                 class="d-flex align-center justify-center"
                 lazy-validation
-                @submit.prevent="onAddTodo"
+                @submit.prevent="addTodo"
               >
                 <v-text-field
                   v-model="enteredValue"
@@ -57,18 +57,21 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <TodoResults
+        <!-- <TodoResults
           v-if="todos.length >= 1"
           :todos="todos"
-          @onDeleteTodo="onDeleteTodo"
-        />
-        <h1
+          @onDeleteTodo="removeTodo"
+        /> -->
+
+        <!-- after adding VueX -->
+        <TodoResults v-if="todos.length >= 1" />
+        <!-- <h1
           v-else
           class="text-center mt-5 font-weight-regular"
           style="color:#1876D3"
         >
           Add Your Tasks And Make Your Day!
-        </h1>
+        </h1> -->
       </v-col>
     </v-row>
   </v-container>
@@ -77,32 +80,49 @@
 <script lang="ts">
 import { Vue, Component, Ref } from 'nuxt-property-decorator';
 
+import { store } from '../store';
+
 @Component
 export default class Index extends Vue {
   @Ref('form') form!: HTMLFormElement
 
   enteredValue = '';
 
-  todos: Array<string> = [];
+  // todos: Array<string> = [];
 
-  // pushing current todo in todos array
-  onAddTodo () {
+  // // pushing current todo in todos array
+  // onAddTodo () {
+  //   if (this.form.validate()) {
+  //     this.todos.push(this.enteredValue);
+  //     this.enteredValue = '';
+  //   }
+  // }
+
+  // // Deleting todo
+  // onDeleteTodo (index: string | number) {
+  //   // initializing remaining tods
+  //   let remainingTodo: Array<string> = [];
+
+  //   // Filtering todos and removing choosen todo
+  //   remainingTodo = this.todos.filter((_item, idx) => idx !== index);
+
+  //   // updating the state
+  //   this.todos = remainingTodo;
+
+  //   // migrating into vuex
+
+  // geting list of todo
+  get todos () : Array<string> {
+    return store.state.todo.list;
+  }
+
+  // pushing new todo in the list array
+  addTodo () {
     if (this.form.validate()) {
-      this.todos.push(this.enteredValue);
+      // this.$store.commit('ADD_TODO', this.enteredValue);
+      store.commit.ADD_TODO(this.enteredValue);
       this.enteredValue = '';
     }
   }
-
-  // Deleting todo
-  onDeleteTodo (index: string | number) {
-    // initializing remaining tods
-    let remainingTodo: Array<string> = [];
-
-    // Filtering todos and removing choosen todo
-    remainingTodo = this.todos.filter((_item, idx) => idx !== index);
-
-    // updating the state
-    this.todos = remainingTodo;
-  }
-}
+};
 </script>

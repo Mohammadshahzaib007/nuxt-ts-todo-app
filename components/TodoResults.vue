@@ -11,8 +11,9 @@
             <v-btn
               icon
               color="primary"
-              @click="$emit('onDeleteTodo', i)"
+              @click="removeTodo(i)"
             >
+              <!-- @click="$emit('onDeleteTodo', i)" -->
               <v-icon>
                 mdi-delete-sweep
               </v-icon>
@@ -35,16 +36,30 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator';
+import { Vue, Component } from 'nuxt-property-decorator';
+import { store } from '../store';
 
 @Component
 export default class TodoResults extends Vue {
- @Prop()
-// array of todos which we are looping throught in template and rendering it
- todos!: Array<string>;
+//  @Prop()
+  // array of todos which we are looping throught in template and rendering it
+  //  todos!: Array<string>;
 
- // emiting event for deleting todo and passing index of the todo
- emit = ['onDeleteTodo']
+  // emiting event for deleting todo and passing index of the todo
+  //  emit = ['onDeleteTodo']
+
+  // after using vuex
+
+  // global state of todos
+
+  public get todos () : Array<string> {
+    return store.state.todo.list;
+  }
+
+  // deleting todo
+  removeTodo (index:number) {
+    store.commit.REMOVE_TODO(index);
+  }
 };
 </script>
 
